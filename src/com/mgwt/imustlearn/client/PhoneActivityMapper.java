@@ -18,8 +18,14 @@ package com.mgwt.imustlearn.client;
 import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.place.shared.Place;
+import com.mgwt.imustlearn.client.activity.about.AboutActivity;
+import com.mgwt.imustlearn.client.activity.about.AboutPlace;
 import com.mgwt.imustlearn.client.activity.home.HomeActivity;
 import com.mgwt.imustlearn.client.activity.home.HomePlace;
+import com.mgwt.imustlearn.client.activity.wordForm.WordFormActivity;
+import com.mgwt.imustlearn.client.activity.wordForm.WordFormPlace;
+import com.mgwt.imustlearn.client.activity.words.WordListActivity;
+import com.mgwt.imustlearn.client.activity.words.WordListPlace;
 
 /**
  * @author Daniel Kurka
@@ -36,6 +42,19 @@ public class PhoneActivityMapper implements ActivityMapper {
     public Activity getActivity(Place place) {
         if (place instanceof HomePlace) {
             return new HomeActivity(clientFactory);
+        }
+
+        if (place instanceof AboutPlace) {
+            return new AboutActivity(clientFactory);
+        }
+
+        if (place instanceof WordListPlace) {
+            return new WordListActivity(clientFactory);
+        }
+
+        if (place instanceof WordFormPlace) {
+
+            return new WordFormActivity(clientFactory, ((WordFormPlace) place).getID());
         }
 
         /*Add your activities*/

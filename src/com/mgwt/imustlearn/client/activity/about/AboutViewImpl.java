@@ -25,8 +25,6 @@ public class AboutViewImpl extends GeneralViewImpl implements AboutView {
 
         round.add(new HTML("Using GWT to build mobile apps"));
 
-        round.add(new HTML("<br/><br/><a target='_blank' href='http://www.m-gwt.com'>www.m-gwt.com</a><br/><br/>"));
-
         if (MGWT.getOsDetection().isPhone()) {
             button = new Button("back");
             button.getElement().setAttribute("style", "margin:auto;width: 200px;display:block");

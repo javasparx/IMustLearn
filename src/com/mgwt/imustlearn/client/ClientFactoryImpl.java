@@ -1,6 +1,7 @@
 /* * Javlon Eraliyev * */
 package com.mgwt.imustlearn.client;
 
+import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.SimpleEventBus;
@@ -10,10 +11,14 @@ import com.mgwt.imustlearn.client.activity.animation.AnimationView;
 import com.mgwt.imustlearn.client.activity.animation.AnimationViewGwtImpl;
 import com.mgwt.imustlearn.client.activity.home.HomeView;
 import com.mgwt.imustlearn.client.activity.home.HomeViewImpl;
+import com.mgwt.imustlearn.client.activity.wordForm.WordFormView;
+import com.mgwt.imustlearn.client.activity.wordForm.WordFormViewImpl;
 import com.mgwt.imustlearn.client.activity.words.WordListView;
 import com.mgwt.imustlearn.client.activity.words.WordListViewImpl;
 import com.mgwt.imustlearn.client.animationdone.AnimationDoneView;
 import com.mgwt.imustlearn.client.animationdone.AnimationDoneViewImpl;
+
+import java.util.HashMap;
 
 /**
  * @author Daniel Kurka
@@ -22,19 +27,12 @@ public class ClientFactoryImpl implements ClientFactory {
 
     private EventBus eventBus;
     private PlaceController placeController;
+    private HashMap<String, Place> placeMap = new HashMap<String, Place>();
 
     @Override
     public EventBus getEventBus() {
         return eventBus;
     }
-
-
-    private AnimationDoneView animationDoneView;
-    private HomeView homeView;
-    private AboutView aboutView;
-    private WordListView wordListView;
-
-    private AnimationView animationView;
 
     public ClientFactoryImpl() {
         eventBus = new SimpleEventBus();
@@ -44,6 +42,32 @@ public class ClientFactoryImpl implements ClientFactory {
         homeView = new HomeViewImpl();
         wordListView = new WordListViewImpl();
     }
+
+    @Override
+    public PlaceController getPlaceController() {
+        return placeController;
+    }
+
+    @Override
+    public Place getPlaceByID(String ID) {
+        return placeMap.get(ID);
+    }
+
+    @Override
+    public void putPlace(String ID, Place place) {
+        placeMap.put(ID, place);
+    }
+
+    /**
+     * *******Views*********
+     */
+
+    private AnimationDoneView animationDoneView;
+    private HomeView homeView;
+    private AboutView aboutView;
+    private WordListView wordListView;
+    private AnimationView animationView;
+    private WordFormView wordFormView;
 
     @Override
     public HomeView getHomeView() {
@@ -70,11 +94,6 @@ public class ClientFactoryImpl implements ClientFactory {
     }
 
     @Override
-    public PlaceController getPlaceController() {
-        return placeController;
-    }
-
-    @Override
     public AnimationDoneView getAnimationDoneView() {
         if (animationDoneView == null) {
             animationDoneView = new AnimationDoneViewImpl();
@@ -89,5 +108,13 @@ public class ClientFactoryImpl implements ClientFactory {
         }
         return animationView;
     }
+
+    public WordFormView getWordFormView() {
+        if (wordFormView == null) {
+            wordFormView = new WordFormViewImpl();
+        }
+        return wordFormView;
+    }
+
 
 }

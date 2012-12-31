@@ -4,6 +4,8 @@ package com.mgwt.imustlearn.client;
 import com.google.gwt.place.shared.Place;
 import com.googlecode.mgwt.mvp.client.Animation;
 import com.googlecode.mgwt.mvp.client.AnimationMapper;
+import com.mgwt.imustlearn.client.activity.about.AboutPlace;
+import com.mgwt.imustlearn.client.activity.words.WordListPlace;
 
 /**
  * @author Daniel Kurka
@@ -12,6 +14,14 @@ public class PhoneAnimationMapper implements AnimationMapper {
 
     @Override
     public Animation getAnimation(Place oldPlace, Place newPlace) {
+
+        if (newPlace instanceof AboutPlace) {
+            return Animation.POP;
+        }
+
+        if (newPlace instanceof WordListPlace) {
+            return Animation.FLIP;
+        }
 
         //TODO - add animation switch
 //        if (oldPlace instanceof UIPlace && newPlace instanceof HomePlace) {

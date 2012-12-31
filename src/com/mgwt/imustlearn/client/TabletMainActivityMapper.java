@@ -6,6 +6,8 @@ import com.google.gwt.place.shared.Place;
 import com.mgwt.imustlearn.client.activity.about.AboutActivity;
 import com.mgwt.imustlearn.client.activity.about.AboutPlace;
 import com.mgwt.imustlearn.client.activity.home.HomePlace;
+import com.mgwt.imustlearn.client.activity.wordForm.WordFormActivity;
+import com.mgwt.imustlearn.client.activity.wordForm.WordFormPlace;
 import com.mgwt.imustlearn.client.activity.words.WordListActivity;
 import com.mgwt.imustlearn.client.activity.words.WordListPlace;
 
@@ -57,6 +59,11 @@ public class TabletMainActivityMapper implements ActivityMapper {
 
         if (newPlace instanceof WordListPlace) {
             return getWordListActivity();
+        }
+
+        if (newPlace instanceof WordFormPlace) {
+            return new WordFormActivity(clientFactory, ((WordFormPlace) newPlace).getID());
+//            return new WordFormActivity(clientFactory);
         }
 //
 //        if (newPlace instanceof UIPlace) {

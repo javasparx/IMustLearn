@@ -30,7 +30,7 @@ public class AppHistoryObserver implements HistoryObserver {
 
     @Override
     public void onAppStarted(Place place, HistoryHandler historyHandler) {
-        if (MGWT.getOsDetection().isPhone() || true) {
+        if (MGWT.getOsDetection().isPhone()) {
             onPhoneNav(place, historyHandler);
         } else {
             // tablet
@@ -56,7 +56,7 @@ public class AppHistoryObserver implements HistoryObserver {
             }
         });
 
-        HandlerRegistration register2 = ActionEvent.register(eventBus, ActionNames.BACK, new ActionEvent.Handler() {
+        HandlerRegistration registerBack = ActionEvent.register(eventBus, ActionNames.BACK, new ActionEvent.Handler() {
 
             @Override
             public void onAction(ActionEvent event) {
@@ -80,7 +80,7 @@ public class AppHistoryObserver implements HistoryObserver {
 
         HandlerRegistrationCollection registrationCollection = new HandlerRegistrationCollection();
         registrationCollection.addHandlerRegistration(register);
-        registrationCollection.addHandlerRegistration(register2);
+        registrationCollection.addHandlerRegistration(registerBack);
         registrationCollection.addHandlerRegistration(registerWordListSelected);
         return registrationCollection;
     }

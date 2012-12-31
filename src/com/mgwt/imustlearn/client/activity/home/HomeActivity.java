@@ -32,8 +32,6 @@ public class HomeActivity extends MGWTAbstractActivity {
         view.setTitle("Home");
         view.setRightButtonText("about");
 
-        view.getFirstHeader().setText("IMustLearn");
-
         view.setTopics(createTopicsList());
 
         addHandlerRegistration(view.getCellSelectedHandler().addCellSelectedHandler(
@@ -41,14 +39,9 @@ public class HomeActivity extends MGWTAbstractActivity {
 
                     @Override
                     public void onCellSelected(CellSelectedEvent event) {
-                        int index = event.getIndex();
-                        if (index == 0) {
-                            clientFactory.getPlaceController().goTo(new AboutPlace());
-                            return;
-                        }
-                        if (index == 1) {
-                            clientFactory.getPlaceController().goTo(new WordListPlace());
-                        }
+                        String index = String.valueOf(event.getIndex());
+
+                        clientFactory.getPlaceController().goTo(clientFactory.getPlaceByID(index));
 
                     }
                 }));
@@ -60,7 +53,14 @@ public class HomeActivity extends MGWTAbstractActivity {
     private List<Topic> createTopicsList() {
         ArrayList<Topic> list = new ArrayList<Topic>();
         list.add(new Topic("About", 5));
+        clientFactory.putPlace(getIndexOfLast(list), new AboutPlace());
+
         list.add(new Topic("Words", 5));
+        clientFactory.putPlace(getIndexOfLast(list), new WordListPlace());
         return list;
+    }
+
+    private String getIndexOfLast(List list) {
+        return String.valueOf(list.size() - 1);
     }
 }

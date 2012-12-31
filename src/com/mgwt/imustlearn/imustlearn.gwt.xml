@@ -5,9 +5,18 @@
     <!-- Inherit the core Web Toolkit stuff.                  -->
     <inherits name='com.google.gwt.user.User'/>
     <inherits name="com.googlecode.mgwt.MGWT"/>
+    <inherits name="com.google.code.gwt.database.Html5Database"/>
 
     <!-- Specify the app entry point class.                   -->
     <entry-point class='com.mgwt.imustlearn.client.IMustLearnEntryPoint'/>
+
+    <!--For debug-->
+    <!--<set-property name="user.agent" value="safari"/>-->
+    <set-property name="user.agent" value="gecko1_8,safari"/>
+    <set-property name="mgwt.os" value="android"/>
+    <!--<set-property name="locale" value="en"/>-->
+    <set-configuration-property name="mgwt.css" value="pretty"/>
+    <!--For debug end-->
 
     <!-- Specify the app servlets.                   -->
     <!--<servlet path='/imustlearnService' class='com.mgwt.IMustLearnEntryPoint.server.imustlearnServiceImpl'/>-->

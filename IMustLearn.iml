@@ -4,7 +4,7 @@
     <facet type="gwt" name="GWT">
       <configuration>
         <setting name="compilerMaxHeapSize" value="512" />
-        <setting name="gwtScriptOutputStyle" value="DETAILED" />
+        <setting name="gwtScriptOutputStyle" value="PRETTY" />
         <setting name="gwtSdkUrl" value="file://D:/Downloads/Developing/gwt-2.5.0/gwt-2.5.0" />
         <setting name="webFacet" value="Web" />
       </configuration>
@@ -27,12 +27,13 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.idea" />
       <excludeFolder url="file://$MODULE_DIR$/gwt-unitCache" />
-      <excludeFolder url="file://$MODULE_DIR$/lib" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="gwt-user" level="project" />
     <orderEntry type="library" name="mgwt-1.1.2" level="project" />
+    <orderEntry type="library" name="gwt-html5-database" level="project" />
+    <orderEntry type="library" name="gwt-dev" level="project" />
   </component>
 </module>
 

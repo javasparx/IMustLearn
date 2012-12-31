@@ -5,6 +5,7 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.googlecode.mgwt.dom.client.event.tap.HasTapHandlers;
 
 public interface GeneralView extends IsWidget {
+
     public HasText getHeader();
 
     public HasText getBackbuttonText();
