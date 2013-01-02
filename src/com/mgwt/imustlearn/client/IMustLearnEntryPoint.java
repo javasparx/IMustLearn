@@ -20,6 +20,7 @@ import com.googlecode.mgwt.ui.client.layout.OrientationRegionHandler;
 import com.googlecode.mgwt.ui.client.util.SuperDevModeUtil;
 import com.mgwt.imustlearn.client.activity.home.HomePlace;
 import com.mgwt.imustlearn.client.css.AppBundle;
+import com.mgwt.imustlearn.client.css.CoreBundle;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>
@@ -105,6 +106,9 @@ public class IMustLearnEntryPoint implements EntryPoint {
 
         // Start PlaceHistoryHandler with our PlaceHistoryMapper
         AppPlaceHistoryMapper historyMapper = GWT.create(AppPlaceHistoryMapper.class);
+
+        /******Core.css for custom styles******/
+        StyleInjector.inject(CoreBundle.INSTANCE.css().getText());
 
         if (MGWT.getOsDetection().isTablet()) {
 

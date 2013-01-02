@@ -1,0 +1,4 @@
+    /*For buttons in CellList*/
+    .overide-mgwt-BarButton {
+        height: 25px !important;
+    }

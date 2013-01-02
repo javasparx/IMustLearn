@@ -4,9 +4,7 @@ import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.web.bindery.event.shared.EventBus;
 import com.googlecode.mgwt.mvp.client.MGWTAbstractActivity;
 import com.mgwt.imustlearn.client.ClientFactory;
-import com.mgwt.imustlearn.client.model.Language;
-import com.mgwt.imustlearn.client.model.Translation;
-import com.mgwt.imustlearn.client.model.Word;
+import com.mgwt.imustlearn.client.model.*;
 
 import java.util.ArrayList;
 
@@ -67,6 +65,13 @@ public class WordFormActivity extends MGWTAbstractActivity {
         translations.add(new Translation("mashina", Language.RU));
 
         view.setWords(translations);
+
+        ArrayList<Media> medias = new ArrayList<Media>();
+        medias.add(new Media(0, "asd", MediaType.IMAGE));
+        medias.add(new Media(0, "sdfg", MediaType.VIDEO));
+        medias.add(new Media(0, "adqw", MediaType.AUDIO));
+
+        view.setMedias(medias);
 
         panel.setWidget(view);
     }

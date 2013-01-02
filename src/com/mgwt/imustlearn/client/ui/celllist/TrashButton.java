@@ -1,4 +1,4 @@
-package com.mgwt.imustlearn.client.event.mycelllist.celllist;
+package com.mgwt.imustlearn.client.ui.celllist;
 
 import com.google.gwt.resources.client.ImageResource;
 import com.googlecode.mgwt.ui.client.MGWTStyle;
@@ -7,9 +7,9 @@ import com.googlecode.mgwt.ui.client.MGWTStyle;
  * User: JAVASPARX
  * Date: 30.12.12
  */
-public class ArrowLeftButton implements CellButton {
+public class TrashButton implements CellButton {
     @Override
     public ImageResource getImageResource() {
-        return MGWTStyle.getTheme().getMGWTClientBundle().getButtonBarArrowLeftImage();
+        return MGWTStyle.getTheme().getMGWTClientBundle().getButtonBarTrashImage();
     }
 }

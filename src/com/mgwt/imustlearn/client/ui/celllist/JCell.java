@@ -1,4 +1,4 @@
-package com.mgwt.imustlearn.client.event.mycelllist.celllist;
+package com.mgwt.imustlearn.client.ui.celllist;
 
 /**
  * A JCell represents a small amount of html when rendered

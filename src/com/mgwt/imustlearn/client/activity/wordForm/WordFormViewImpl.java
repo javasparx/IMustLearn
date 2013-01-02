@@ -1,7 +1,5 @@
 package com.mgwt.imustlearn.client.activity.wordForm;
 
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
 import com.googlecode.mgwt.dom.client.event.tap.HasTapHandlers;
@@ -10,11 +8,10 @@ import com.googlecode.mgwt.dom.client.event.tap.TapHandler;
 import com.googlecode.mgwt.ui.client.widget.*;
 import com.googlecode.mgwt.ui.client.widget.buttonbar.ButtonBar;
 import com.googlecode.mgwt.ui.client.widget.buttonbar.PlusButton;
-import com.mgwt.imustlearn.client.event.mycelllist.celllist.*;
 import com.mgwt.imustlearn.client.model.Language;
 import com.mgwt.imustlearn.client.model.Media;
 import com.mgwt.imustlearn.client.model.Translation;
-import com.mgwt.imustlearn.client.ui.CellListWithButtons;
+import com.mgwt.imustlearn.client.ui.celllist.*;
 
 import java.util.ArrayList;
 
@@ -25,22 +22,23 @@ import java.util.ArrayList;
 public class WordFormViewImpl implements WordFormView {
 
     private LayoutPanel main;
-    private FlowPanel content;
     private HeaderButton headerCancelButton;
     private HeaderButton headerSaveButton;
     private HTML title = new HTML("Edit Word");
     private WidgetList wordPanel;
     private WidgetList mediaPanel;
     private ScrollPanel scrollPanel;
+    private WidgetList content;
 
-    private CellListWithButtons<Translation> cellListWithButtons;
+    private CellListWithHeader<Translation> translationCellList;
+    private CellListWithHeader<Media> mediaCellList;
 
     private ArrayList<Translation> translations = new ArrayList<Translation>();
+    private ArrayList<Media> medias = new ArrayList<Media>();
 
     public WordFormViewImpl() {
 
         main = new LayoutPanel();
-//        content = new FlowPanel();
         scrollPanel = new ScrollPanel();
         HeaderPanel headerPanel = new HeaderPanel();
         ButtonBar buttonBar = new ButtonBar();
@@ -51,7 +49,7 @@ public class WordFormViewImpl implements WordFormView {
             @Override
             public void onTap(TapEvent event) {
                 translations.add(new Translation("New tr", Language.UZ));
-                cellListWithButtons.render(translations);
+                translationCellList.getCellList().render(translations);
                 scrollPanel.refresh();
             }
         });
@@ -95,7 +93,7 @@ public class WordFormViewImpl implements WordFormView {
 //        content.add(wordPanel);
 //        content.add(mediaPanel);
 
-        cellListWithButtons = new CellListWithButtons<Translation>(new JCell<Translation>() {
+        translationCellList = new CellListWithHeader<Translation>(new JCell<Translation>() {
             @Override
             public boolean hasWidgets() {
                 return true;
@@ -109,14 +107,38 @@ public class WordFormViewImpl implements WordFormView {
 
         }, new ComposeButton(), new TrashButton());
 
-//        cellListWithButtons.setRound(true);
+        translationCellList.getCellList().setGroup(false);
 
-        scrollPanel.setWidget(cellListWithButtons);
+        mediaCellList = new CellListWithHeader<Media>(new JCell<Media>() {
+            @Override
+            public boolean hasWidgets() {
+                return true;
+            }
+
+            @Override
+            public String getDisplayString(Media model) {
+                return model.getPath();
+            }
+        });
 
 
-//        content.add(cellListWithButtons);
+        translationCellList.getHeader().setText("Translations");
 
-//        cellListWithButtons.render();
+        mediaCellList.getHeader().setText("Media");
+
+//        translationCellList.setRound(true);
+
+        content = new WidgetList();
+
+        content.add(translationCellList);
+        content.add(mediaCellList);
+
+        scrollPanel.setWidget(content);
+
+
+//        content.add(translationCellList);
+
+//        translationCellList.render();
 
 
 //        buttonBar.add(new ActionButton());
@@ -186,45 +208,39 @@ public class WordFormViewImpl implements WordFormView {
     }
 
     @Override
-    public void setWords(ArrayList<Translation> translations) {
+    public void setWords(final ArrayList<Translation> translations) {
 //        wordPanel.clear();
         this.translations = translations;
 
-        cellListWithButtons.render(translations);
-//        for (Translation translation : translations) {
-//            FlowPanel flowPanel = new FlowPanel();
-//
-//            ButtonBarText text = new ButtonBarText(translation.getText());
-//
-//            flowPanel.add(text);
-//
-//            ComposeButton eButton = new ComposeButton();
-//
-//            eButton.getElement().getStyle().setFloat(Style.Float.RIGHT);
-//            flowPanel.add(eButton);
-//
-//            TrashButton dButton = new TrashButton();
-//
-//            dButton.getElement().getStyle().setFloat(Style.Float.RIGHT);
-//            flowPanel.add(dButton);
-//
-//            flowPanel.getElement().getStyle().setProperty("minWidth",200, Style.Unit.PX);
-//
-//            wordPanel.add(flowPanel);
-//        }
+        translationCellList.getCellList().render(translations);
 
-        cellListWithButtons.addWidgetSelectedHandler(new WidgetSelectedHandler() {
+        translationCellList.getCellList().addWidgetSelectedHandler(new WidgetSelectedHandler() {
+
             @Override
             public void onWidgetSelected(WidgetSelectedEvent event) {
-                Window.alert("Widget selected index at: " + event.getIndexOfWidget() + " " +
-                        "cell index: " + event.getIndexOfCell());
+                int idx = event.getIndexOfWidget();
+                int idxCell = event.getIndexOfCell();
+                if (idx == 1) {
+                    translations.remove(idxCell);
+                    translationCellList.getCellList().render(translations);
+                    scrollPanel.refresh();
+                }
             }
         });
     }
 
     @Override
     public void setMedias(ArrayList<Media> medias) {
-        mediaPanel.clear();
+//        mediaPanel.clear();
+        this.medias = medias;
 
+        mediaCellList.getCellList().render(medias, new TrashButton());
+
+        mediaCellList.getCellList().addWidgetSelectedHandler(new WidgetSelectedHandler() {
+            @Override
+            public void onWidgetSelected(WidgetSelectedEvent event) {
+
+            }
+        });
     }
 }

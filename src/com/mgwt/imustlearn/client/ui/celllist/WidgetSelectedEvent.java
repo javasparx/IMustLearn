@@ -1,4 +1,4 @@
-package com.mgwt.imustlearn.client.event.mycelllist.celllist;
+package com.mgwt.imustlearn.client.ui.celllist;
 
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.shared.GwtEvent;

@@ -33,7 +33,7 @@ import com.googlecode.mgwt.ui.client.MGWT;
 import com.googlecode.mgwt.ui.client.MGWTStyle;
 import com.googlecode.mgwt.ui.client.theme.base.ListCss;
 import com.googlecode.mgwt.ui.client.widget.touch.TouchWidget;
-import com.mgwt.imustlearn.client.event.mycelllist.celllist.*;
+import com.mgwt.imustlearn.client.ui.celllist.*;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -95,7 +95,7 @@ public class CellListWithButtons<T> extends Composite implements HasWidgetSelect
 
     public interface WidgetTemplate extends SafeHtmlTemplates {
 
-        @SafeHtmlTemplates.Template("<div __w_index=\"{0}\" style=\"{2}\" class=\"{1}\">{3}</div>")
+        @SafeHtmlTemplates.Template("<div __w_index=\"{0}\" style=\"{2}\" class=\"overide-mgwt-BarButton {1}\">{3}</div>")
         SafeHtml div(int idx, String classes, SafeStyles css, String html);
 
     }
@@ -140,7 +140,7 @@ public class CellListWithButtons<T> extends Composite implements HasWidgetSelect
                 // deselect
                 if (node != null) {
                     node.removeClassName(css.selected());
-                    stopTimer();
+//                    stopTimer();
                 }
 
             }
@@ -150,9 +150,8 @@ public class CellListWithButtons<T> extends Composite implements HasWidgetSelect
         @Override
         public void onTouchEnd(TouchEndEvent event) {
             if (node != null) {
-                if (!wasWidgetSelected)
-                    node.removeClassName(css.selected());
-                stopTimer();
+                node.removeClassName(css.selected());
+//                stopTimer();
             }
             if (started && !moved && index != -1) {
                 if (wasWidgetSelected && idxButton != -1) {
@@ -237,7 +236,6 @@ public class CellListWithButtons<T> extends Composite implements HasWidgetSelect
             index = getIndexFromProperty(idxString);
 
             node = target;
-            startTimer(node);
         }
 
         private int getIndexFromProperty(String idxString) {
@@ -246,8 +244,10 @@ public class CellListWithButtons<T> extends Composite implements HasWidgetSelect
                 try {
                     // see: http://code.google.com/p/mgwt/issues/detail?id=154
                     if (MGWT.getOsDetection().isBlackBerry()) {
+//                        startTimer(node);
                         return (int) Long.parseLong(idxString);
                     } else {
+//                        startTimer(node);
                         return Integer.parseInt(idxString);
                     }
 
